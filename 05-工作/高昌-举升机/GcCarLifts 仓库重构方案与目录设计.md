@@ -6,11 +6,14 @@ tags:
   - 命名规范
   - AI 辅助开发
   - GcCarLifts
+aliases:
+  - "GcCarLifts GitHub 组织全部仓库目录详解 全新"
+  - "GcCarLifts GitHub 仓库重构方案 & 完整目录详解"
 created: 2026-05-15
 updated: 2026-05-15
 ---
 
-# GcCarLifts GitHub 仓库重构方案 & 完整目录详解
+# GcCarLifts 仓库重构方案与目录设计
 
 > **目标**: 建立清晰、统一、可扩展的仓库管理体系，便于团队协作与 AI 辅助开发。
 > **状态**: 📝 规划中（尚未执行，仅展示重构后的预期状态）

@@ -4,11 +4,14 @@ tags:
   - GitHub
   - 技术资料
   - GcCarLifts
+aliases:
+  - "GcCarLifts GitHub组织全部仓库目录详解"
+  - "GcCarLifts GitHub 组织 — 仓库目录详解"
 created: 2026-05-15
 updated: 2026-05-15
 ---
 
-# GcCarLifts GitHub 组织 — 仓库目录详解
+# GcCarLifts 组织仓库现状与目录说明
 
 > **组织地址**: https://github.com/GcCarLifts
 > **组织类型**: Organization（组织）
