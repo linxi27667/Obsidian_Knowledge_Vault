@@ -24,5 +24,5 @@ skill_source: .codex/skills/obsidian-journal/SKILL.md
 
 ## 今天的相关记录
 
-- [[01-日志/2026-10-10 举升机制造与金蝶ERP学习]]
+- [[01-日志/2026-10-10/2026-10-10 举升机制造与金蝶ERP学习]]
 - [[Gc_Iot_Lift-新电脑环境配置提示词]]
