@@ -1,0 +1,36 @@
+[
+    {
+        "File":  "skill-test-demo.r1-print",
+        "Passed":  true,
+        "SourceControls":  37,
+        "RoundtripControls":  37,
+        "AllIDsFound":  true,
+        "GeometryAndDataPreserved":  true,
+        "StylesVersion":  "1.0",
+        "QR":  [
+                   {
+                       "ID":  "qr_bill",
+                       "Size":  "85x85"
+                   }
+               ],
+        "Warning":  null,
+        "AssemblyVersion":  "9.0.553.10"
+    },
+    {
+        "File":  "skill-test-repair.r1-print",
+        "Passed":  true,
+        "SourceControls":  37,
+        "RoundtripControls":  37,
+        "AllIDsFound":  true,
+        "GeometryAndDataPreserved":  true,
+        "StylesVersion":  "1.0",
+        "QR":  [
+                   {
+                       "ID":  "qr_bill",
+                       "Size":  "85x85"
+                   }
+               ],
+        "Warning":  null,
+        "AssemblyVersion":  "9.0.553.10"
+    }
+]

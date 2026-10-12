@@ -1,0 +1,21 @@
+{
+  "file": "ceshi.r1-print",
+  "deliverable": "广州高昌-工序计划单-AI套打Demo.r1-print",
+  "preview": "广州高昌-工序计划单-AI套打Demo-版式预览.png",
+  "controls": 37,
+  "data_bindings": 0,
+  "page": "A5 LANDSCAPE",
+  "qr_value": "OP093762",
+  "qr_encode_type": "Qrcode",
+  "before_sha256": "684c06eda2f934b2dc8a4b4360aa6b821711f4c4b35d0d1c0c83b8ec27f55968",
+  "after_sha256": "2385c9ad59959ad2cb13876f7de20a74bb8846d52b5eb81a990cc02bff35d2cc",
+  "checks": [
+    "XML parse",
+    "unique IDs",
+    "style references",
+    "control boundaries",
+    "original DataSources unchanged"
+  ],
+  "note": "Static sample layout demo. No actual production order binding. Red '改动后' is a screenshot annotation, not print content.",
+  "validation_scope": "Initial XML/layout checks only, not native import proof."
+}

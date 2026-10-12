@@ -1,0 +1,4 @@
+模板/*.r1-print -text whitespace=cr-at-eol
+截图/* -text
+历史诊断/*.ps1 -text whitespace=cr-at-eol
+kingdee-r1-print/scripts/validate_native.ps1 -text

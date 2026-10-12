@@ -1,0 +1,4 @@
+interface:
+  display_name: "金蝶套打模板修改"
+  short_description: "按样张修改套打版式，保留 XML 契约并核验原生导入"
+  default_prompt: "使用 $kingdee-r1-print 修改这份套打模板，先确认 Demo 或真实字段绑定，再验证并交付。"

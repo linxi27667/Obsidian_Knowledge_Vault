@@ -1,0 +1,4 @@
+完整 Skill: Skill is valid!
+知识库入口: Skill is valid!
+Demo生成/版本修复/XML检查/原生读取写回与二维码生成: 通过
+Skill格式校验依赖: PyYAML 6.0.3，仅安装在本任务 work 目录，不写入知识库。

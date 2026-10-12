@@ -1,0 +1,38 @@
+[
+    {
+        "File":  "01 原始骨架.r1-print",
+        "Passed":  true,
+        "SourceControls":  7,
+        "RoundtripControls":  7,
+        "AllIDsFound":  true,
+        "GeometryAndDataPreserved":  true,
+        "StylesVersion":  "1.0",
+        "QR":  [
+
+               ],
+        "Warning":  null,
+        "AssemblyVersion":  "9.0.553.10"
+    },
+    {
+        "File":  "02 首次生成导入报错.r1-print",
+        "Passed":  false,
+        "Error":  "System.Management.Automation.MethodInvocationException: Exception calling \"FromXml\" with \"2\" argument(s): \"Object reference not set to an instance of an object.\" ---\u003e System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at Kingdee.BOS.NotePrinting.KDF.Style.StyleParser.Upgrade(XmlElement eleStyles)\r\n   at Kingdee.BOS.NotePrinting.ReportOne.Common.Model.IO.StyleCache.CacheStyleFromXml(XmlElement root)\r\n   at Kingdee.BOS.NotePrinting.ReportOne.Common.Model.IO.AbstractR1XmlReader.FromXml(XmlElement root, IDataXmlTrans dataXmlTrans)\r\n   at CallSite.Target(Closure , CallSite , Object , Object , Object )\r\n   --- End of inner exception stack trace ---\r\n   at System.Management.Automation.ExceptionHandlingOps.CheckActionPreference(FunctionContext funcContext, Exception exception)\r\n   at System.Management.Automation.Interpreter.ActionCallInstruction`2.Run(InterpretedFrame frame)\r\n   at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)\r\n   at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)"
+    },
+    {
+        "File":  "03 修复后成功导入.r1-print",
+        "Passed":  true,
+        "SourceControls":  37,
+        "RoundtripControls":  37,
+        "AllIDsFound":  true,
+        "GeometryAndDataPreserved":  true,
+        "StylesVersion":  "1.0",
+        "QR":  [
+                   {
+                       "ID":  "qr_bill",
+                       "Size":  "85x85"
+                   }
+               ],
+        "Warning":  null,
+        "AssemblyVersion":  "9.0.553.10"
+    }
+]

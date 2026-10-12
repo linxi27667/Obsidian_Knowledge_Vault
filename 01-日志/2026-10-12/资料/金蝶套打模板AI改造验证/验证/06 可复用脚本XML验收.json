@@ -1,0 +1,20 @@
+[
+  {
+    "file": "skill-test-demo.r1-print",
+    "passed": true,
+    "controls": 37,
+    "styles_version": "1.0",
+    "bindings_need_business_metadata": [],
+    "errors": [],
+    "warnings": []
+  },
+  {
+    "file": "skill-test-repair.r1-print",
+    "passed": true,
+    "controls": 37,
+    "styles_version": "1.0",
+    "bindings_need_business_metadata": [],
+    "errors": [],
+    "warnings": []
+  }
+]

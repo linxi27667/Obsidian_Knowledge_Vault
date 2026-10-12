@@ -1,0 +1,426 @@
+{
+  "description": "Static Demo only; A5 landscape is this example choice, not a universal requirement.",
+  "page": {
+    "height": 1380,
+    "width": 2000,
+    "paper": "A5",
+    "margin": {
+      "right": 50,
+      "bottom": 50,
+      "left": 50,
+      "top": 50
+    },
+    "orientation": "LANDSCAPE"
+  },
+  "styles": {
+    "0": {
+      "horizontal": "center",
+      "size": 14.0,
+      "bordered": false,
+      "wrap": false
+    },
+    "1": {
+      "horizontal": "left",
+      "size": 9.0,
+      "bordered": false,
+      "wrap": true
+    },
+    "2": {
+      "horizontal": "center",
+      "size": 8.0,
+      "bordered": true,
+      "wrap": true
+    },
+    "3": {
+      "horizontal": "left",
+      "size": 8.0,
+      "bordered": true,
+      "wrap": true
+    },
+    "4": {
+      "horizontal": "left",
+      "size": 9.0,
+      "bordered": true,
+      "wrap": true
+    },
+    "5": {
+      "horizontal": "center",
+      "size": 8.5,
+      "bordered": false,
+      "wrap": false
+    }
+  },
+  "controls": [
+    {
+      "type": "Text",
+      "id": "title",
+      "styleId": "0",
+      "x": 420,
+      "y": 0,
+      "width": 820,
+      "height": 82,
+      "text": "示例工厂 工序计划单"
+    },
+    {
+      "type": "Text",
+      "id": "production_order",
+      "styleId": "1",
+      "x": 60,
+      "y": 105,
+      "width": 510,
+      "height": 58,
+      "text": "生产订单： MO000001"
+    },
+    {
+      "type": "Text",
+      "id": "material_number",
+      "styleId": "1",
+      "x": 620,
+      "y": 105,
+      "width": 520,
+      "height": 58,
+      "text": "物料编码： 00000001"
+    },
+    {
+      "type": "Text",
+      "id": "operation_bill",
+      "styleId": "1",
+      "x": 1190,
+      "y": 105,
+      "width": 455,
+      "height": 58,
+      "text": "单据编号： OP000001"
+    },
+    {
+      "type": "Text",
+      "id": "product_name",
+      "styleId": "1",
+      "x": 60,
+      "y": 175,
+      "width": 515,
+      "height": 88,
+      "text": "产品名称： 示例焊接组件"
+    },
+    {
+      "type": "Text",
+      "id": "specification",
+      "styleId": "1",
+      "x": 620,
+      "y": 175,
+      "width": 545,
+      "height": 88,
+      "text": "规格型号： DEMO-01"
+    },
+    {
+      "type": "Text",
+      "id": "order_quantity",
+      "styleId": "1",
+      "x": 1190,
+      "y": 175,
+      "width": 455,
+      "height": 88,
+      "text": "下单数量： 30.00"
+    },
+    {
+      "type": "Text",
+      "id": "release_date",
+      "styleId": "1",
+      "x": 60,
+      "y": 270,
+      "width": 510,
+      "height": 58,
+      "text": "下达日期： 2026-5-25"
+    },
+    {
+      "type": "Text",
+      "id": "plan_start",
+      "styleId": "1",
+      "x": 620,
+      "y": 270,
+      "width": 520,
+      "height": 58,
+      "text": "计划开工： 2026-5-25"
+    },
+    {
+      "type": "Text",
+      "id": "plan_finish",
+      "styleId": "1",
+      "x": 1190,
+      "y": 270,
+      "width": 455,
+      "height": 58,
+      "text": "计划完工： 2026-6-30"
+    },
+    {
+      "type": "Barcode",
+      "id": "qr_bill",
+      "styleId": "5",
+      "x": 1700,
+      "y": 90,
+      "width": 215,
+      "height": 215,
+      "text": "OP000001",
+      "EncodeType": "Qrcode"
+    },
+    {
+      "type": "Text",
+      "id": "heading_1",
+      "styleId": "2",
+      "x": 15,
+      "y": 330,
+      "width": 126,
+      "height": 85,
+      "text": "工序名称"
+    },
+    {
+      "type": "Text",
+      "id": "operation_1",
+      "styleId": "2",
+      "x": 15,
+      "y": 415,
+      "width": 126,
+      "height": 120,
+      "text": "焊接"
+    },
+    {
+      "type": "Text",
+      "id": "heading_2",
+      "styleId": "2",
+      "x": 141,
+      "y": 330,
+      "width": 941,
+      "height": 85,
+      "text": "工序说明"
+    },
+    {
+      "type": "Text",
+      "id": "operation_2",
+      "styleId": "3",
+      "x": 141,
+      "y": 415,
+      "width": 941,
+      "height": 120,
+      "text": "1. 按图的明细表，领齐所有零部件，焊接要求：焊缝应平整均匀，不允许有裂纹、焊穿、脱焊、漏焊，应清除干净药皮、焊渣及飞溅，转入现场待喷涂仓库。"
+    },
+    {
+      "type": "Text",
+      "id": "heading_3",
+      "styleId": "2",
+      "x": 1082,
+      "y": 330,
+      "width": 101,
+      "height": 85,
+      "text": "准备时\n间"
+    },
+    {
+      "type": "Text",
+      "id": "operation_3",
+      "styleId": "2",
+      "x": 1082,
+      "y": 415,
+      "width": 101,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_4",
+      "styleId": "2",
+      "x": 1183,
+      "y": 330,
+      "width": 98,
+      "height": 85,
+      "text": "加工\n时间"
+    },
+    {
+      "type": "Text",
+      "id": "operation_4",
+      "styleId": "2",
+      "x": 1183,
+      "y": 415,
+      "width": 98,
+      "height": 120,
+      "text": "164"
+    },
+    {
+      "type": "Text",
+      "id": "heading_5",
+      "styleId": "2",
+      "x": 1281,
+      "y": 330,
+      "width": 93,
+      "height": 85,
+      "text": "班组"
+    },
+    {
+      "type": "Text",
+      "id": "operation_5",
+      "styleId": "2",
+      "x": 1281,
+      "y": 415,
+      "width": 93,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_6",
+      "styleId": "2",
+      "x": 1374,
+      "y": 330,
+      "width": 123,
+      "height": 85,
+      "text": "操作工"
+    },
+    {
+      "type": "Text",
+      "id": "operation_6",
+      "styleId": "2",
+      "x": 1374,
+      "y": 415,
+      "width": 123,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_7",
+      "styleId": "2",
+      "x": 1497,
+      "y": 330,
+      "width": 81,
+      "height": 85,
+      "text": "完工\n数量"
+    },
+    {
+      "type": "Text",
+      "id": "operation_7",
+      "styleId": "2",
+      "x": 1497,
+      "y": 415,
+      "width": 81,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_8",
+      "styleId": "2",
+      "x": 1578,
+      "y": 330,
+      "width": 75,
+      "height": 85,
+      "text": "工废\n数量"
+    },
+    {
+      "type": "Text",
+      "id": "operation_8",
+      "styleId": "2",
+      "x": 1578,
+      "y": 415,
+      "width": 75,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_9",
+      "styleId": "2",
+      "x": 1653,
+      "y": 330,
+      "width": 131,
+      "height": 85,
+      "text": "主管\n审核"
+    },
+    {
+      "type": "Text",
+      "id": "operation_9",
+      "styleId": "2",
+      "x": 1653,
+      "y": 415,
+      "width": 131,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "heading_10",
+      "styleId": "2",
+      "x": 1784,
+      "y": 330,
+      "width": 131,
+      "height": 85,
+      "text": "完工\n检验"
+    },
+    {
+      "type": "Text",
+      "id": "operation_10",
+      "styleId": "2",
+      "x": 1784,
+      "y": 415,
+      "width": 131,
+      "height": 120,
+      "text": ""
+    },
+    {
+      "type": "Text",
+      "id": "remarks",
+      "styleId": "4",
+      "x": 15,
+      "y": 535,
+      "width": 1900,
+      "height": 55,
+      "text": "备注： 本单仅用于静态排版验证"
+    },
+    {
+      "type": "Text",
+      "id": "received_quantity",
+      "styleId": "1",
+      "x": 30,
+      "y": 595,
+      "width": 445,
+      "height": 58,
+      "text": "入库合格数量："
+    },
+    {
+      "type": "Text",
+      "id": "warehouse_receiver",
+      "styleId": "1",
+      "x": 500,
+      "y": 595,
+      "width": 455,
+      "height": 58,
+      "text": "仓管签收人："
+    },
+    {
+      "type": "Text",
+      "id": "warehouse",
+      "styleId": "1",
+      "x": 1080,
+      "y": 595,
+      "width": 335,
+      "height": 58,
+      "text": "仓库："
+    },
+    {
+      "type": "Text",
+      "id": "warehouse_location",
+      "styleId": "1",
+      "x": 1530,
+      "y": 595,
+      "width": 385,
+      "height": 58,
+      "text": "仓位："
+    },
+    {
+      "type": "Text",
+      "id": "page_number_demo",
+      "styleId": "5",
+      "x": 675,
+      "y": 1300,
+      "width": 650,
+      "height": 60,
+      "text": "第1页，共1页"
+    }
+  ]
+}
