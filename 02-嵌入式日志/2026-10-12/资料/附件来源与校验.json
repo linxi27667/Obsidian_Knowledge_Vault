@@ -1,0 +1,401 @@
+{
+  "recorded_at": "2026-10-12T14:09:46+08:00",
+  "archives": [
+    {
+      "file": "02-嵌入式日志/2026-10-12/资料/对话/4G模组与电路设计完整对话.md",
+      "messages": 91,
+      "first": "2026-10-12T00:16:20.839Z",
+      "last": "2026-10-12T06:02:05.756Z"
+    },
+    {
+      "file": "02-嵌入式日志/2026-10-12/资料/对话/NFC选型与工业开源方案完整对话.md",
+      "messages": 14,
+      "first": "2026-10-11T11:40:58.515Z",
+      "last": "2026-10-11T11:48:40.376Z"
+    }
+  ],
+  "attachments": [
+    {
+      "file": "资料/4G/Quectel_EG800AK系列_硬件设计手册_V1.1.pdf",
+      "origin": "C:\\Users\\juncheng.liu\\Downloads\\Quectel_EG800AK系列_硬件设计手册_V1.1.pdf",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 1994386,
+      "sha256": "23b605e0f63e0658401c2ca81889370cc8d8b5935b13cbbda2c36cc2aae57d7b"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK-CN消费级_硬件设计手册_V1.1.pdf",
+      "origin": "C:\\Users\\juncheng.liu\\Downloads\\Quectel_EG800AK-CN消费级_硬件设计手册_V1.1.pdf",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 2146041,
+      "sha256": "4d8819221ddf587cd7d2afdcba713d8e96d94ce9348a8ddaab99d2aa6d02a2f1"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK-CN_FootprintPart_V1.3.zip",
+      "origin": "C:\\Users\\juncheng.liu\\Downloads\\Quectel_EG800AK-CN_FootprintPart_V1.3.zip",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 746331,
+      "sha256": "31fee3bf776d486732c9a776a35fd73af3b855a13e67e84adbb8c1fd7321f3a8"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK-CN_PCB_Footprint_AD_20250802.PcbDoc",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Quectel_EG800AK-CN_PCB_Footprint_AD_20250802.PcbDoc",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 776192,
+      "sha256": "19f608e2f311e3d51d3950f414a8666db7552d5077cc61f42443638e79fa081a"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK-CN_SCH_Part_AD_20250802.SchDoc",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Quectel_EG800AK-CN_SCH_Part_AD_20250802.SchDoc",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 163840,
+      "sha256": "b5b13a15f3fbd7d37e924315760b42d7099bb7d144269872f20c3c7c479dfc65"
+    },
+    {
+      "file": "资料/4G/截图/01-移远下载资料列表.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-a3757d56-631c-43a4-bfee-df9f5cb8837b.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 63227,
+      "sha256": "46a653cf793cc7d580a46b36e025012cadba54769993e1061c10312c42d042a8"
+    },
+    {
+      "file": "资料/4G/截图/02-手册5V输入供电参考图.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-fb1df351-8bf9-43b1-866e-91573ecdb8dd.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 41503,
+      "sha256": "dbb543345d10efd29c63f432973731672fbaf8b03975607b3c2bd749675190b3"
+    },
+    {
+      "file": "资料/4G/截图/03-EDA载流线宽计算器.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-b2ef6368-6300-49fc-94de-99df8eefe131.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 117544,
+      "sha256": "4fa3172e379af9a243397c63c6305aee0110553ebda2e80098c1c80a670160e4"
+    },
+    {
+      "file": "资料/4G/截图/04-EDA工具菜单.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-0e1ee463-69e1-40e6-8d3c-56cf560e0197.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 402109,
+      "sha256": "bea3b87db6a143ce8be75ef4b9bc185cd9868f53854239585726c2a5fc4ee8de"
+    },
+    {
+      "file": "资料/4G/截图/05-EDA两层板设置.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-d67159db-e820-4791-b8fa-44d679125755.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 377027,
+      "sha256": "691a96d78e6524bdf75aa5768c34158028b384386c8da0db1484b2287fe15e87"
+    },
+    {
+      "file": "资料/4G/截图/06-EDA四层板设置.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-095b7426-4c06-439c-871e-c9c84e5a7375.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 212172,
+      "sha256": "6ff53eb38795e080d7177d68d15c42dc6e183bb8e4e9be50c36b8bf90313f51f"
+    },
+    {
+      "file": "资料/4G/截图/07-嘉立创阻抗计算与叠层.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-94ef2310-a7e7-4fdc-83c3-aeca7f1d32a7.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 104879,
+      "sha256": "2e230e0bf7cd99dd1b35c34c84dfc6f323ac43b86fadcf6d625f25d4f31c534b"
+    },
+    {
+      "file": "资料/4G/截图/08-3313A的13.6mil线宽结果.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\codex-clipboard-76629f58-3d9e-4412-a249-aa801b0a54d9.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 82916,
+      "sha256": "5048863ea6564e087878b84e9b575327ea871cde46a38caff9f28ab45484f109"
+    },
+    {
+      "file": "资料/4G/截图/09-移远电源参考页.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\EG800AK_power_ref_page.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 256920,
+      "sha256": "b232ec26a6401311d59aab64c05e942c56fbc6ec8b51cc48aeae12e0298e3260"
+    },
+    {
+      "file": "资料/4G/截图/10-TPS54360的5V参考电路.png",
+      "origin": "C:\\Users\\juncheng.liu\\AppData\\Local\\Temp\\TPS54360_TI_fig34.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 312463,
+      "sha256": "7fed435f20305df90660738cc1df8959cf5aab2af995aabb6dca66856d88e08b"
+    },
+    {
+      "file": "资料/4G/截图/cn_pinout.png",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Gc_Iot_Lift\\tmp\\pdfs\\cn_pinout.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 198252,
+      "sha256": "bee8f8a0b4d90a04de3a7fd83697cd51c40556b8fa342d298614b6909eadbb29"
+    },
+    {
+      "file": "资料/4G/截图/cn_footprint.png",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Gc_Iot_Lift\\tmp\\pdfs\\cn_footprint.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 108961,
+      "sha256": "bd1d1444727c39c9692833b8a206e0143fa9c1830130afb41ef2b4ebcf2b88b7"
+    },
+    {
+      "file": "资料/4G/截图/cn_power.png",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Gc_Iot_Lift\\tmp\\pdfs\\cn_power.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 214538,
+      "sha256": "81a11b861fe5c9c17d8304858b9ea7788a51ed017f2ede0d76e66db3bdca6433"
+    },
+    {
+      "file": "资料/4G/截图/cn_rf.png",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Gc_Iot_Lift\\tmp\\pdfs\\cn_rf.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 233013,
+      "sha256": "ffc3dcebe73c0f4fbf06db350301d608cfc468ae6639452eb5413f5aeb467c46"
+    },
+    {
+      "file": "资料/4G/截图/series_gnss.png",
+      "origin": "C:\\Users\\juncheng.liu\\Desktop\\Gc_Iot_Lift\\tmp\\pdfs\\series_gnss.png",
+      "kind": "用户提供/本次讨论使用的本地资料",
+      "bytes": 246872,
+      "sha256": "33744e201b313d470ba6c52c6b6818e9b621f7f97fd500cbac4a055b716aa89e"
+    },
+    {
+      "file": "资料/4G/TI_TPS54360_datasheet.pdf",
+      "origin": "https://www.ti.com/lit/ds/symlink/tps54360.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 2465984,
+      "sha256": "c2743e51e9f180e3efd7afb2ce1ac792906576207f4e318f9b6075f3ab5c56a8"
+    },
+    {
+      "file": "资料/4G/TI_TPS54302_datasheet.pdf",
+      "origin": "https://www.ti.com/lit/ds/symlink/tps54302.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 2316621,
+      "sha256": "1632b388d1ba3a46c8e8f090ddfec2114c0f538cfb8364ddcda583fee3fdbdc5"
+    },
+    {
+      "file": "资料/4G/Microchip_MIC29302A_datasheet.pdf",
+      "origin": "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/20005897B.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 880237,
+      "sha256": "7ab2675814b169146422e0dff738058359fff759552aeb938eb2f00125ee5052"
+    },
+    {
+      "file": "资料/4G/ADI_LT1963A_datasheet.pdf",
+      "origin": "https://www.analog.com/media/en/technical-documentation/data-sheets/lt1963a.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 1239097,
+      "sha256": "05182936a569ba4bf880928f058a864501adb49f920178c1fe1286e124f144d9"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK工业级产品规格_V1.3.pdf",
+      "origin": "https://quec-mall-prod.oss-cn-shanghai.aliyuncs.com/resource-library/inside/Quectel_EG800AK%E7%B3%BB%E5%88%97_LTE_Standard_%E6%A8%A1%E5%9D%97%E4%BA%A7%E5%93%81%E8%A7%84%E6%A0%BC%E4%B9%A6_V1.3.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 360245,
+      "sha256": "70ee5da3f81b67d65808878bc585a36d4fc3e8fabb41e6e2537e87c0b701ebe3"
+    },
+    {
+      "file": "资料/4G/Quectel_EC800K_EG800K_Reference_Design_V1.0.pdf",
+      "origin": "https://developer.quectel.com/wp-content/uploads/2024/09/Quectel_EC800KEG800K_Series_QuecOpen_Reference_Design_V1.0-1.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 649062,
+      "sha256": "2b0a814747981cdbbcd659f3a2da75a6407983f3f48e841e8c5560fe0e201865"
+    },
+    {
+      "file": "资料/4G/开源参考/p3-cellular-module_power-supply.kicad_sch",
+      "origin": "https://raw.githubusercontent.com/themainframe/p3-cellular-module/master/power-supply.kicad_sch",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 33765,
+      "sha256": "10b85e66b0217fef7c508a7f15cd301feb5d09db48ad274b1c08434dcc22760b"
+    },
+    {
+      "file": "资料/4G/开源参考/p3-cellular-module_README.txt",
+      "origin": "https://raw.githubusercontent.com/themainframe/p3-cellular-module/master/README.md",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 642,
+      "sha256": "52805b806309c9f36046fc6e96e35105fcff59d9e021dc46524de8bb4de3346e"
+    },
+    {
+      "file": "资料/4G/开源参考/ARMmbed_BG96_v1.2.0.sch",
+      "origin": "https://raw.githubusercontent.com/ARMmbed/reference-design-RD2166/master/Hardware/Example_Implementation/Module_Expansion_Board/MEB-Quectel-BG96-v1.2.0.sch",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 271275,
+      "sha256": "21b20ebce26aace93e7580c41579924ba77267788463caad00d63181fa22c6d1"
+    },
+    {
+      "file": "资料/NFC/开源参考/ST_RFAL_LICENSE.txt",
+      "origin": "https://raw.githubusercontent.com/stm32duino/NFC-RFAL/main/LICENSE",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 6012,
+      "sha256": "588225da2562c8214bc8f604bd7e1668126d693d56efb240c3e57263c032c85c"
+    },
+    {
+      "file": "资料/NFC/开源参考/Prismo_README.txt",
+      "origin": "https://raw.githubusercontent.com/nu31hackerspace/prismo/main/README.md",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 6521,
+      "sha256": "73919e902b3b74c50cf1389a44db2c5c676390cfe2ee792da2353c69b47f9bfa"
+    },
+    {
+      "file": "资料/NFC/开源参考/Prismo_LICENSE.txt",
+      "origin": "https://raw.githubusercontent.com/nu31hackerspace/prismo/main/LICENSE",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 1074,
+      "sha256": "0f57a72f82b7c9c430622b007042f4e4c9e2f571860eb1e74684bff5ba99678c"
+    },
+    {
+      "file": "资料/对话/4G模组与电路设计完整对话.md",
+      "origin": "codex://threads/01a12d77-8fc0-75a1-a447-7221771a15b4",
+      "kind": "公开会话文字归档",
+      "bytes": 52784,
+      "sha256": "6b6783dbc6fd79cf22e23502bbfb2c9cbbb31a2573d4a9932cee8717e805d8c3"
+    },
+    {
+      "file": "资料/对话/NFC选型与工业开源方案完整对话.md",
+      "origin": "codex://threads/01a12ac3-a3c5-7422-a946-409670276623",
+      "kind": "公开会话文字归档",
+      "bytes": 10312,
+      "sha256": "89814c88f402e9ef7fbdf0020f9921211f6ec7c7777b864cce3bb43fec8667c1"
+    },
+    {
+      "file": "资料/NFC/ST_ST25R3916B_datasheet.pdf",
+      "origin": "https://www.st.com.cn/resource/en/datasheet/st25r3916b.pdf",
+      "kind": "官方区域站点下载；2026-10-12快照",
+      "bytes": 2373988,
+      "sha256": "cc9910ba8129d1610f7c2c3ca610831a515c15c9d8e8d807395cf07338b788a3"
+    },
+    {
+      "file": "资料/NFC/ST_ST25R200_datasheet.pdf",
+      "origin": "https://www.st.com.cn/resource/en/datasheet/st25r200.pdf",
+      "kind": "官方区域站点下载；2026-10-12快照",
+      "bytes": 6009776,
+      "sha256": "6be9da1b571d701ab1eee78ca77dd42aa66714396e51d50ae89b3a36a841fdf6"
+    },
+    {
+      "file": "资料/NFC/ST_X-NUCLEO-NFC10A1_data_brief.pdf",
+      "origin": "https://www.st.com.cn/resource/en/data_brief/x-nucleo-nfc10a1.pdf",
+      "kind": "官方区域站点下载；2026-10-12快照",
+      "bytes": 1760029,
+      "sha256": "3dafa9619b10bff6c02f51245a10cfbcfca5caf4ad779ca21fcefad685578b71"
+    },
+    {
+      "file": "资料/NFC/ST_AN5276_天线设计.pdf",
+      "origin": "https://www.st.com.cn/resource/en/application_note/an5276-antenna-design-for-st25r391616b-st25r391717b-st25r3918-st25r3919b-and-st25r392020b-devices-stmicroelectronics.pdf",
+      "kind": "官方区域站点下载；2026-10-12快照",
+      "bytes": 2427203,
+      "sha256": "91db176aef01617b67fc3010a54eaa17ef4c6d894fc5e4b57bdb3a990135e52f"
+    },
+    {
+      "file": "资料/NFC/NXP_MFRC522_datasheet.pdf",
+      "origin": "https://cache.nxp.com/docs/en/data-sheet/MFRC522.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 833199,
+      "sha256": "5e2fdff12348a21b0203fed3fc49a252d589c39511324ad29396e1975fe01451"
+    },
+    {
+      "file": "资料/NFC/NXP_AN13219_PN7160天线匹配.pdf",
+      "origin": "https://cache.nxp.com/docs/en/application-note/AN13219.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 11595724,
+      "sha256": "cae47079932766f304c40e0a9a0d01d69dc8db2e5560070e0ea13cbe5ae5e982"
+    },
+    {
+      "file": "资料/4G/Quectel_EG800K产品介绍_V1.1.pdf",
+      "origin": "https://developer.quectel.com/wp-content/uploads/2024/09/Quectel_EG800K%E7%B3%BB%E5%88%97_LTE_Standard_%E6%A8%A1%E5%9D%97%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D_V1.1.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 2693097,
+      "sha256": "5edeff0abca2dfa4ea445673e7a9eaffcf19393c1450fa0dffcbaeada3ec19ee"
+    },
+    {
+      "file": "资料/4G/Quectel_EC800G-CN产品介绍_V1.2.pdf",
+      "origin": "https://developer.quectel.com/wp-content/uploads/2024/09/Quectel_EC800G-CN_LTE_Standard_%E6%A8%A1%E5%9D%97%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D_V1.2.pdf",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 2273829,
+      "sha256": "dd39cddd1ebc5f5a69e2753d8ede2022014a50bfb94bc9c3249f58f280651d43"
+    },
+    {
+      "file": "资料/4G/开源参考/LILYGO_T-SIM-DC-Shield_README.txt",
+      "origin": "https://raw.githubusercontent.com/Xinyuan-LilyGO/LilyGo-Modem-Series/main/docs/en/shield/t-sim-dc-shield/README.MD",
+      "kind": "官方文档/作者公开项目；2026-10-12下载快照",
+      "bytes": 5522,
+      "sha256": "703a9a76efd99c8aebfcbd824012e26a02b91506125e25849d1d8bcd7f2de40b"
+    }
+  ],
+  "unavailable": [],
+  "pdfs": [
+    {
+      "file": "资料/4G/Quectel_EG800AK系列_硬件设计手册_V1.1.pdf",
+      "pages": 83
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK-CN消费级_硬件设计手册_V1.1.pdf",
+      "pages": 69
+    },
+    {
+      "file": "资料/4G/TI_TPS54360_datasheet.pdf",
+      "pages": 50
+    },
+    {
+      "file": "资料/4G/TI_TPS54302_datasheet.pdf",
+      "pages": 32
+    },
+    {
+      "file": "资料/4G/Microchip_MIC29302A_datasheet.pdf",
+      "pages": 24
+    },
+    {
+      "file": "资料/4G/ADI_LT1963A_datasheet.pdf",
+      "pages": 28
+    },
+    {
+      "file": "资料/4G/Quectel_EG800AK工业级产品规格_V1.3.pdf",
+      "pages": 3
+    },
+    {
+      "file": "资料/4G/Quectel_EC800K_EG800K_Reference_Design_V1.0.pdf",
+      "pages": 22
+    },
+    {
+      "file": "资料/NFC/ST_ST25R3916B_datasheet.pdf",
+      "pages": 167
+    },
+    {
+      "file": "资料/NFC/ST_ST25R200_datasheet.pdf",
+      "pages": 88
+    },
+    {
+      "file": "资料/NFC/ST_X-NUCLEO-NFC10A1_data_brief.pdf",
+      "pages": 7
+    },
+    {
+      "file": "资料/NFC/ST_AN5276_天线设计.pdf",
+      "pages": 44
+    },
+    {
+      "file": "资料/NFC/NXP_MFRC522_datasheet.pdf",
+      "pages": 95
+    },
+    {
+      "file": "资料/NFC/NXP_AN13219_PN7160天线匹配.pdf",
+      "pages": 67
+    },
+    {
+      "file": "资料/4G/Quectel_EG800K产品介绍_V1.1.pdf",
+      "pages": 26
+    },
+    {
+      "file": "资料/4G/Quectel_EC800G-CN产品介绍_V1.2.pdf",
+      "pages": 21
+    }
+  ],
+  "zip_entries": [
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_AD_V1.3/",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_AD_V1.3/Quectel_EG800AK-CN_PCB_Footprint_AD_20250802.PcbDoc",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_AD_V1.3/Quectel_EG800AK-CN_SCH_Part_AD_20250802.SchDoc",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_Cadence_V1.3/",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_Cadence_V1.3/Quectel_EG800AK-CN_PCB_Footprint_Cadence_20250802.brd",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_Cadence_V1.3/Quectel_EG800AK-CN_SCH_Part_Cadence_20250802.DSN",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_PADS_V1.3/",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_PADS_V1.3/Quectel_EG800AK-CN_PCB_Footprint_PADS_20250802.pcb",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_PADS_V1.3/Quectel_EG800AK-CN_SCH_Part_PADS_20250802.sch",
+    "Quectel_EG800AK-CN_Footprint&Part_V1.3/Quectel_EG800AK-CN_Footprint&Part_Revision_History.xlsx"
+  ],
+  "completed_at": "2026-10-12T14:30:54+08:00"
+}

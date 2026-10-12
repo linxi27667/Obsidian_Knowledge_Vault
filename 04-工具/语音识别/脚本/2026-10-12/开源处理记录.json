@@ -1,0 +1,45 @@
+{
+  "processed_date": "2026-10-12",
+  "timezone": "Asia/Shanghai",
+  "projects": {
+    "sherpa-onnx": "https://github.com/k2-fsa/sherpa-onnx",
+    "SenseVoice": "https://github.com/QwenAudio/SenseVoice",
+    "Sumy": "https://github.com/miso-belica/sumy",
+    "jieba": "https://github.com/fxsjy/jieba"
+  },
+  "pipeline": "PyAV decode -> SenseVoice ASR -> Paraformer independent ASR -> Sumy TextRank extractive summary",
+  "models_directory": "C:\\Users\\juncheng.liu\\.codex\\tmp\\audio-dialogue-20261011",
+  "audio_files": [
+    {
+      "source": "C:\\Users\\juncheng.liu\\Documents\\xwechat_files\\wxid_ju03a9g7z3z622_c26b\\msg\\file\\2026-10\\仓库物料管理相关讨论.m4a",
+      "duration_seconds": 678.0786875,
+      "date_user_provided": "2026-10-12",
+      "sample_rate": 16000,
+      "asr_segments": 29,
+      "asr_characters": 3326,
+      "source_sha256": "9e0df839ef5e56cd4be7bc09c061587eb4da675f3cb537c9eb4ce52eea143517",
+      "speaker_clustering_usable": false,
+      "summary_algorithm": "Sumy TextRank",
+      "summary_count": 18,
+      "transcript_file": "01 仓库物料管理相关讨论 完整文字稿.txt"
+    },
+    {
+      "source": "C:\\Users\\juncheng.liu\\Documents\\xwechat_files\\wxid_ju03a9g7z3z622_c26b\\msg\\file\\2026-10\\企业生产运营相关讨论.m4a",
+      "duration_seconds": 795.0933125,
+      "date_user_provided": "2026-10-12",
+      "sample_rate": 16000,
+      "asr_segments": 33,
+      "asr_characters": 4277,
+      "source_sha256": "521378ec97eb8ff6fb3bf932c87745703d35d4716d34ac016d3649871d1d8bcb",
+      "speaker_clustering_usable": false,
+      "summary_algorithm": "Sumy TextRank",
+      "summary_count": 18,
+      "transcript_file": "02 企业生产运营相关讨论 完整文字稿.txt"
+    }
+  ],
+  "limitations": [
+    "ASR and extractive summary are machine results; not a human verbatim verification.",
+    "Automatic speaker clustering unreliable; delivered transcript retains timestamps and does not assert named speaker identities.",
+    "Business analysis in file 04 is a separate interpretation of source text, not an output of TextRank."
+  ]
+}
