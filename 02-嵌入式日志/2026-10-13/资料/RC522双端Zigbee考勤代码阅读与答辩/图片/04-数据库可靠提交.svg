@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="155" viewBox="0 0 720 155">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#62858b"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<line x1="173" y1="77" x2="185" y2="77" stroke="#62858b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="353" y1="77" x2="365" y2="77" stroke="#62858b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="533" y1="77" x2="545" y2="77" stroke="#62858b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="5" y="35" width="168" height="85" rx="5" fill="#f4f8f8" stroke="#829ba0"/>
+<text x="89.0" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="black">旧镜像有效</text>
+<text x="89.0" y="78" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="black">目标标记置0</text>
+<rect x="185" y="35" width="168" height="85" rx="5" fill="#f4f8f8" stroke="#829ba0"/>
+<text x="269.0" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="black">写目标内容</text>
+<text x="269.0" y="78" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="black">每块回读校验</text>
+<rect x="365" y="35" width="168" height="85" rx="5" fill="#f4f8f8" stroke="#829ba0"/>
+<text x="449.0" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="black">最终提交</text>
+<text x="449.0" y="78" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="black">最后写0xA5</text>
+<rect x="545" y="35" width="168" height="85" rx="5" fill="#f4f8f8" stroke="#829ba0"/>
+<text x="629.0" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="14" fill="black">新镜像活动</text>
+<text x="629.0" y="78" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="black">重启按代次选择</text>
+</svg>
