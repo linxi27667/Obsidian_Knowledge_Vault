@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3V ⇄ 1.8V 三极管电平转换与RC加速网络深度交互仿真 v2</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background-color: #0b1120;
+    color: #f8fafc;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h2 { margin: 0 0 4px 0; color: #38bdf8; font-size: 22px; }
+  .subtitle { color: #94a3b8; font-size: 13.5px; margin-bottom: 14px; text-align: center; }
+
+  /* 顶部控制栏 */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 14px;
+    background: #1e293b;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1180px;
+  }
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .control-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #cbd5e1;
+  }
+  .divider { width: 1px; height: 26px; background: #475569; }
+
+  button {
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  button:hover { transform: translateY(-1px); }
+  button:active { transform: translateY(1px); }
+  .btn-high { background: #ef4444; color: white; box-shadow: 0 0 10px rgba(239,68,68,0.4); }
+  .btn-low { background: #3b82f6; color: white; box-shadow: 0 0 10px rgba(59,130,246,0.4); }
+  .btn-auto { background: #10b981; color: white; }
+  .btn-auto.active { background: #f59e0b; box-shadow: 0 0 12px rgba(245,158,11,0.5); }
+  
+  /* 故障与实验按钮 */
+  .btn-exp-on { background: #0284c7; color: white; border: 1px solid #38bdf8; }
+  .btn-exp-warn { background: #d97706; color: white; border: 1px solid #fbbf24; }
+  .btn-exp-danger { background: #dc2626; color: white; border: 1px solid #f87171; animation: pulseDanger 1s infinite; }
+  @keyframes pulseDanger {
+    0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.6); }
+    50% { box-shadow: 0 0 18px rgba(239,68,68,1); }
+  }
+
+  /* 主体双栏布局 */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 740px 420px;
+    gap: 16px;
+    width: 100%;
+    max-width: 1180px;
+  }
+
+  .canvas-box {
+    background: #1e293b;
+    border: 2px solid #334155;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    position: relative;
+  }
+  svg.main-svg { width: 100%; height: 490px; display: block; }
+
+  /* 右侧显微镜与示波器面板 */
+  .side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .panel-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  .panel-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #facc15;
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 6px;
+  }
+
+  /* 电流流动动画 */
+  .current-flow-left {
+    stroke-dasharray: 8, 8;
+    animation: flowLeft 0.35s linear infinite;
+  }
+  .current-flow-right {
+    stroke-dasharray: 8, 8;
+    animation: flowRight 0.35s linear infinite;
+  }
+  .current-flow-danger {
+    stroke-dasharray: 10, 6;
+    animation: flowLeft 0.12s linear infinite;
+  }
+  @keyframes flowLeft {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 16; }
+  }
+  @keyframes flowRight {
+    from { stroke-dashoffset: 16; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* 电容加速瞬态闪光 */
+  .cap-vip-active {
+    filter: drop-shadow(0 0 10px #fde047);
+    stroke: #fde047 !important;
+  }
+
+  /* 底部详细说明区 */
+  .explain-box {
+    width: 100%;
+    max-width: 1180px;
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 14px;
+  }
+  .card {
+    background: #1e293b;
+    border-left: 4px solid #38bdf8;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.55;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+  .card.rc-card { border-left-color: #facc15; }
+  .card h4 { margin: 0 0 6px 0; color: #facc15; font-size: 14.5px; display: flex; justify-content: space-between; align-items: center; }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 11.5px; font-weight: bold; }
+  .badge-on { background: #10b981; color: #052e16; }
+  .badge-off { background: #64748b; color: #f8fafc; }
+  .badge-danger { background: #ef4444; color: white; }
+  .badge-vip { background: #fde047; color: #0f172a; }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+    background: #0f172a;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+  }
+  .data-item { font-size: 12px; color: #94a3b8; }
+  .data-val { font-size: 14px; font-weight: bold; color: #38bdf8; display: block; margin-top: 2px; }
+
+  .scope-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    margin-top: 6px;
+    color: #cbd5e1;
+  }
+</style>
+</head>
+<body>
+
+  <h2>⚡ 3.3V ⇄ 1.8V 双三极管电平转换 & 基极 RC 网络深度剖析实验室</h2>
+  <div class="subtitle">不仅能切换 TXD/RXD 信号，还可以亲自做“拔掉 1nF 电容”、“短接 4.7K 电阻”、“关断 VDD_EXT”三大破坏性实验！</div>
+
+  <!-- 顶部交互控制台 -->
+  <div class="controls">
+    <div class="control-group">
+      <span class="control-label">信号控制:</span>
+      <button id="btn-txd" class="btn-high" onclick="toggleTXD()">MCU_TXD: 3.3V (高)</button>
+      <button id="btn-maintxd" class="btn-high" onclick="toggleMainTXD()">MAIN_TXD: 1.8V (高)</button>
+      <button id="btn-auto" class="btn-auto" onclick="toggleAuto()">▶ 自动脉冲</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="control-group">
+      <span class="control-label" style="color:#facc15;">🔬 破坏性实验台 (验证基极电路作用):</span>
+      <button id="btn-vdd" class="btn-exp-on" onclick="toggleVDD()">⚡ VDD_EXT: 1.8V 正常开机</button>
+      <button id="btn-res" class="btn-exp-on" onclick="toggleRes()">🛡️ 4.7K 电阻: 正常接入</button>
+      <button id="btn-cap" class="btn-exp-on" onclick="toggleCap()">🚀 1nF 电容: 正常接入</button>
+    </div>
+  </div>
+
+  <!-- 主体区域：左侧主电路 + 右侧基极放大镜与示波器 -->
+  <div class="main-layout">
+    
+    <!-- 左侧：主电路图 -->
+    <div class="canvas-box">
+      <svg class="main-svg" viewBox="0 0 760 490">
+        <defs>
+          <marker id="npn-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f8fafc" />
+          </marker>
+        </defs>
+
+        <!-- 左侧 MCU 模块框 -->
+        <rect x="15" y="35" width="115" height="425" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5"/>
+        <text x="72" y="72" fill="#38bdf8" font-size="20" font-weight="bold" text-anchor="middle">MCU</text>
+        <text x="72" y="94" fill="#94a3b8" font-size="12" text-anchor="middle">(3.3V 供电域)</text>
+        <text x="118" y="195" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="end">TXD</text>
+        <text x="118" y="325" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="end">RXD</text>
+        <text x="118" y="435" fill="#94a3b8" font-size="14" font-weight="bold" text-anchor="end">GND</text>
+
+        <!-- 右侧 Module 模块框 -->
+        <rect x="630" y="35" width="115" height="425" rx="10" fill="#0f172a" stroke="#a855f7" stroke-width="2.5"/>
+        <text x="687" y="72" fill="#a855f7" font-size="20" font-weight="bold" text-anchor="middle">Module</text>
+        <text x="687" y="94" fill="#94a3b8" font-size="12" text-anchor="middle">(1.8V 供电域)</text>
+        <text x="642" y="195" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="start">MAIN_RXD</text>
+        <text x="642" y="325" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="start">MAIN_TXD</text>
+        <text x="642" y="435" fill="#94a3b8" font-size="14" font-weight="bold" text-anchor="start">GND</text>
+
+        <!-- GND 共地线 -->
+        <line x1="130" y1="430" x2="630" y2="430" stroke="#475569" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="380" y="422" fill="#64748b" font-size="11.5" text-anchor="middle">GND 共地参考线 (0V)</text>
+
+        <!-- ==================== 上路：TXD -> MAIN_RXD ==================== -->
+        
+        <!-- 放大镜高亮虚线框（指示右侧显微镜观察区域） -->
+        <rect x="210" y="18" width="215" height="145" rx="8" fill="rgba(250, 204, 21, 0.04)" stroke="#facc15" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="317" y="14" fill="#facc15" font-size="11" font-weight="bold" text-anchor="middle">🔍 右侧放大镜重点监测区</text>
+
+        <!-- VDD_EXT (基极偏置) -->
+        <text id="svg-vdd-top-txt" x="260" y="48" fill="#facc15" font-size="12" font-weight="bold" text-anchor="end">VDD_EXT (1.8V)</text>
+        <line id="svg-vdd-top-bar" x1="268" y1="34" x2="268" y2="58" stroke="#facc15" stroke-width="2.5"/>
+        <line x1="268" y1="46" x2="295" y2="46" stroke="#facc15" stroke-width="2"/>
+        
+        <!-- 4.7K 电阻 (上路) -->
+        <g id="svg-res-top-group">
+          <line x1="295" y1="46" x2="318" y2="46" stroke="#cbd5e1" stroke-width="2"/>
+          <rect id="svg-res-top-box" x="318" y="38" width="44" height="16" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+          <text id="svg-res-top-txt" x="340" y="33" fill="#cbd5e1" font-size="11.5" text-anchor="middle">4.7K (限流)</text>
+          <line x1="362" y1="46" x2="390" y2="46" stroke="#cbd5e1" stroke-width="2"/>
+          <!-- 4.7K 上的压降标注 -->
+          <text id="svg-res-drop-txt" x="340" y="68" fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle">压降: 0V</text>
+        </g>
+
+        <!-- 1nF 电容 (上路并联) -->
+        <g id="svg-cap-top-group">
+          <line x1="295" y1="46" x2="295" y2="92" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="295" y1="92" x2="335" y2="92" stroke="#cbd5e1" stroke-width="2"/>
+          <line id="cap-plate-1" x1="335" y1="82" x2="335" y2="102" stroke="#38bdf8" stroke-width="2.5"/>
+          <line id="cap-plate-2" x1="343" y1="82" x2="343" y2="102" stroke="#38bdf8" stroke-width="2.5"/>
+          <text id="svg-cap-top-txt" x="340" y="115" fill="#38bdf8" font-size="11.5" text-anchor="middle">1nF 加速电容</text>
+          <line x1="343" y1="92" x2="390" y2="92" stroke="#cbd5e1" stroke-width="2"/>
+        </g>
+
+        <!-- 上路三极管 Q1 基极连线 -->
+        <line id="wire-q1-base" x1="390" y1="46" x2="390" y2="155" stroke="#facc15" stroke-width="2.5"/>
+        <circle cx="390" cy="92" r="3.5" fill="#facc15"/>
+        <!-- 基极实时电压标签 -->
+        <rect x="396" y="118" width="78" height="20" rx="4" fill="#0f172a" stroke="#facc15" stroke-width="1"/>
+        <text id="q1-vb-txt" x="435" y="132" fill="#facc15" font-size="11.5" font-weight="bold" text-anchor="middle">VB = 1.8V</text>
+
+        <!-- 上路三极管 Q1 本体 -->
+        <circle id="q1-bg" cx="390" cy="172" r="28" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+        <line x1="370" y1="155" x2="410" y2="155" stroke="#f8fafc" stroke-width="3"/>
+        <line x1="380" y1="155" x2="360" y2="190" stroke="#f8fafc" stroke-width="2.5" marker-end="url(#npn-arrow)"/>
+        <line x1="400" y1="155" x2="420" y2="190" stroke="#f8fafc" stroke-width="2.5"/>
+        <text x="390" y="218" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle" id="q1-label">Q1: 截止 (断开)</text>
+
+        <!-- 上路左段线: MCU TXD -> Q1 发射极 -->
+        <line id="wire-txd-left" x1="130" y1="190" x2="360" y2="190" stroke="#ef4444" stroke-width="3.5"/>
+        <text id="volt-txd-left" x="235" y="180" fill="#ef4444" font-size="13.5" font-weight="bold" text-anchor="middle">VE = 3.3V (高)</text>
+
+        <!-- 上路右段线: Q1 集电极 -> MAIN_RXD -->
+        <line id="wire-txd-right" x1="420" y1="190" x2="630" y2="190" stroke="#facc15" stroke-width="3.5"/>
+        <text id="volt-txd-right" x="545" y="180" fill="#facc15" font-size="13.5" font-weight="bold" text-anchor="middle">1.8V (高)</text>
+
+        <!-- 上路右侧 10K 上拉电阻 -> VDD_EXT -->
+        <text id="svg-vdd-pull-txt" x="485" y="55" fill="#facc15" font-size="12" font-weight="bold" text-anchor="middle">VDD_EXT (1.8V)</text>
+        <line x1="470" y1="65" x2="500" y2="65" stroke="#facc15" stroke-width="2.5"/>
+        <line x1="485" y1="65" x2="485" y2="95" stroke="#facc15" stroke-width="2"/>
+        <rect x="477" y="95" width="16" height="45" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+        <text x="512" y="122" fill="#cbd5e1" font-size="11.5">10K</text>
+        <line id="wire-pullup-top" x1="485" y1="140" x2="485" y2="190" stroke="#facc15" stroke-width="2.5"/>
+        <circle cx="485" cy="190" r="4" fill="#facc15"/>
+
+        <!-- 上路动态电流轨迹：集电极主电流 + 基极偏置小电流 -->
+        <path id="flow-top-main" d="M 485 65 L 485 190 L 420 190 L 390 165 L 360 190 L 130 190" fill="none" stroke="#38bdf8" stroke-width="4" class="current-flow-left" style="display:none;"/>
+        <path id="flow-top-base" d="M 268 46 L 390 46 L 390 155 L 360 190" fill="none" stroke="#facc15" stroke-width="2.5" class="current-flow-right" style="display:none;"/>
+        <path id="flow-top-cap-vip" d="M 268 46 L 295 46 L 295 92 L 390 92 L 390 155 L 360 190" fill="none" stroke="#fde047" stroke-width="4" style="display:none;"/>
+
+
+        <!-- ==================== 下路：MAIN_TXD -> RXD ==================== -->
+
+        <!-- 下路左段线: MCU RXD <- Q2 集电极 -->
+        <line id="wire-rxd-left" x1="130" y1="320" x2="280" y2="320" stroke="#ef4444" stroke-width="3.5"/>
+        <text id="volt-rxd-left" x="195" y="310" fill="#ef4444" font-size="13.5" font-weight="bold" text-anchor="middle">3.3V (高)</text>
+
+        <!-- 下路左侧 10K 上拉电阻 -> VDD_MCU (3.3V) -->
+        <circle cx="250" cy="320" r="4" fill="#ef4444"/>
+        <line id="wire-pullup-bot" x1="250" y1="320" x2="250" y2="355" stroke="#ef4444" stroke-width="2.5"/>
+        <rect x="242" y="355" width="16" height="45" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+        <text x="225" y="382" fill="#cbd5e1" font-size="11.5" text-anchor="end">10K</text>
+        <line x1="250" y1="400" x2="250" y2="418" stroke="#ef4444" stroke-width="2"/>
+        <line x1="235" y1="418" x2="265" y2="418" stroke="#ef4444" stroke-width="2.5"/>
+        <text x="250" y="445" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">VDD_MCU (3.3V)</text>
+
+        <!-- 下路三极管 Q2 本体 -->
+        <circle id="q2-bg" cx="310" cy="338" r="28" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+        <line x1="290" y1="355" x2="330" y2="355" stroke="#f8fafc" stroke-width="3"/>
+        <line x1="300" y1="355" x2="280" y2="320" stroke="#f8fafc" stroke-width="2.5"/>
+        <line x1="320" y1="355" x2="340" y2="320" stroke="#f8fafc" stroke-width="2.5" marker-end="url(#npn-arrow)"/>
+        <text x="310" y="298" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle" id="q2-label">Q2: 截止 (断开)</text>
+
+        <!-- 下路右段线: Q2 发射极 <- MAIN_TXD -->
+        <line id="wire-rxd-right" x1="340" y1="320" x2="630" y2="320" stroke="#facc15" stroke-width="3.5"/>
+        <text id="volt-rxd-right" x="485" y="310" fill="#facc15" font-size="13.5" font-weight="bold" text-anchor="middle">VE = 1.8V (高)</text>
+
+        <!-- 下路 Q2 基极连线与 RC 网络 -->
+        <line x1="310" y1="355" x2="310" y2="440" stroke="#facc15" stroke-width="2"/>
+        <circle cx="310" cy="395" r="3.5" fill="#facc15"/>
+
+        <!-- 1nF 电容 (下路) -->
+        <g id="svg-cap-bot-group">
+          <line x1="310" y1="395" x2="355" y2="395" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="355" y1="385" x2="355" y2="405" stroke="#38bdf8" stroke-width="2.5"/>
+          <line x1="363" y1="385" x2="363" y2="405" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="359" y="378" fill="#38bdf8" font-size="11.5" text-anchor="middle">1nF 加速电容</text>
+          <line x1="363" y1="395" x2="415" y2="395" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="415" y1="395" x2="415" y2="440" stroke="#cbd5e1" stroke-width="2"/>
+        </g>
+
+        <!-- 4.7K 电阻 (下路) -->
+        <g id="svg-res-bot-group">
+          <line x1="310" y1="440" x2="335" y2="440" stroke="#cbd5e1" stroke-width="2"/>
+          <rect id="svg-res-bot-box" x="335" y="432" width="45" height="16" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+          <text id="svg-res-bot-txt" x="357" y="464" fill="#cbd5e1" font-size="11.5" text-anchor="middle">4.7K</text>
+          <line x1="380" y1="440" x2="440" y2="440" stroke="#facc15" stroke-width="2"/>
+        </g>
+        <circle cx="415" cy="440" r="3.5" fill="#facc15"/>
+        <line x1="440" y1="428" x2="440" y2="452" stroke="#facc15" stroke-width="2.5"/>
+        <text id="svg-vdd-bot-txt" x="450" y="445" fill="#facc15" font-size="12" font-weight="bold" text-anchor="start">VDD_EXT (1.8V)</text>
+
+        <!-- 下路动态电流轨迹 -->
+        <path id="flow-bot" d="M 250 418 L 250 320 L 280 320 L 310 345 L 340 320 L 630 320" fill="none" stroke="#38bdf8" stroke-width="4" class="current-flow-right" style="display:none;"/>
+      </svg>
+    </div>
+
+    <!-- 右侧：基极 RC 显微镜 + 串口高速波形对比示波器 -->
+    <div class="side-panel">
+      
+      <!-- 面板1：基极 4.7K + 1nF + VDD_EXT 实时工况显微镜 -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>🔍 基极偏置网络实时显微镜 (上路 Q1)</span>
+          <span id="rc-mode-badge" class="badge badge-off">稳态待机</span>
+        </div>
+        <div style="font-size: 12.5px; color: #cbd5e1; line-height: 1.5;" id="rc-micro-desc">
+          当前 <code>TXD = 3.3V</code>，三极管 B-E 结反偏截止。4.7K 电阻无电流流过，1nF 电容两端保持充饱状态。
+        </div>
+        <div class="data-grid">
+          <div class="data-item">VDD_EXT 基准源电压:<span class="data-val" id="val-vdd">1.80 V</span></div>
+          <div class="data-item">三极管基极电压 (VB):<span class="data-val" id="val-vb">1.80 V</span></div>
+          <div class="data-item">4.7K 电阻承受压降:<span class="data-val" id="val-vr">0.00 V</span></div>
+          <div class="data-item">基极安全偏置电流 (IB):<span class="data-val" id="val-ib">0.00 mA</span></div>
+        </div>
+      </div>
+
+      <!-- 面板2：1nF 加速电容示波器对比 -->
+      <div class="panel-card" style="flex: 1; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="panel-title">
+          <span>📈 示波器：为什么必须并联 1nF 加速电容？</span>
+          <span id="scope-badge" class="badge badge-on">高速方波正常</span>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 6px;">
+          当电平从 0V 跳变回 3.3V 时，三极管基区堆积了大量电荷，必须排空才能关断：
+        </div>
+        
+        <!-- 示波器 SVG 波形对比 -->
+        <svg viewBox="0 0 380 135" style="background:#090d16; border-radius:8px; border:1px solid #334155; width:100%; height:135px;">
+          <!-- 网格线 -->
+          <line x1="0" y1="30" x2="380" y2="30" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="0" y1="105" x2="380" y2="105" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="8" y="25" fill="#64748b" font-size="10">1.8V (高电平)</text>
+          <text x="8" y="120" fill="#64748b" font-size="10">0.1V (低电平)</text>
+
+          <!-- 红色虚线：无 1nF 电容时的拖尾失真波形 -->
+          <path id="wave-nocap" d="M 30 30 L 90 30 L 95 105 L 210 105 Q 255 103 295 30 L 360 30" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3" opacity="0.55"/>
+          
+          <!-- 青色实线：有 1nF 电容时的陡峭方波 -->
+          <path id="wave-withcap" d="M 30 30 L 90 30 L 92 105 L 210 105 L 213 30 L 360 30" fill="none" stroke="#38bdf8" stroke-width="3"/>
+
+          <!-- 标注箭头 -->
+          <text id="scope-note" x="255" y="75" fill="#38bdf8" font-size="11" font-weight="bold">⚡ 1nF 瞬态抽空电荷，边沿极陡！</text>
+        </svg>
+
+        <div class="scope-legend">
+          <span><b style="color:#38bdf8;">━━ 实线：</b>当前输出波形</span>
+          <span><b style="color:#ef4444;">┅┅ 虚线：</b>无 1nF 电容 (RC 拖尾导致高波特率乱码)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 底部三栏详细原理解析 -->
+  <div class="explain-box">
+    <div class="card">
+      <h4>
+        <span>1️⃣ <code>VDD_EXT (1.8V)</code>：定海神针 + 防倒灌</span>
+        <span id="badge-vdd-exp" class="badge badge-on">已开启</span>
+      </h4>
+      <div id="desc-vdd">
+        • <b>提供 1.8V 判决基准</b>：把三极管基极钳在 1.8V，决定三极管只在发射极低于 1.1V 时才导通。<br>
+        • <b>防倒灌保护</b>：你可以点击上方 <b>“⚡ VDD_EXT”</b> 按钮模拟模组断电（0V）。你会发现当模组没开机时，<code>VDD_EXT = 0V</code>，三极管彻底锁死，左边 MCU 的 3.3V 绝对不会倒灌进模组！
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>
+        <span>2️⃣ <code>4.7K 电阻</code>：保命限流阀 (防烧毁)</span>
+        <span id="badge-res-exp" class="badge badge-on">保护中</span>
+      </h4>
+      <div id="desc-res">
+        • <b>为什么不能直接把 1.8V 连到基极？</b>因为三极管 B-E 结是个二极管，导通时会被死死钳位在 <code>0.7V</code>。<br>
+        • 当 <code>TXD=0V</code> 时，基极是 <code>0.7V</code>，多出来的 <code>1.8V - 0.7V = 1.1V</code> 压差全靠 <b>4.7K 电阻</b> 扛住（限流在 0.23mA）。你可以点击上方 <b>“🛡️ 4.7K 电阻”</b> 试试把它短接会发生什么灾难！
+      </div>
+    </div>
+
+    <div class="card rc-card">
+      <h4>
+        <span>3️⃣ <code>1nF 加速电容</code>：瞬态零阻 VIP 通道</span>
+        <span id="badge-cap-exp" class="badge badge-vip">高速加速中</span>
+      </h4>
+      <div id="desc-cap">
+        • <b>平时（稳态）</b>：电容隔直，相当于断开，电流乖乖走 4.7K 电阻。<br>
+        • <b>电平跳变瞬间（瞬态）</b>：电容两端电压不能突变，瞬间相当于<b>短路（0Ω VIP 通道）</b>！绕开慢吞吞的 4.7K 电阻，用大电流脉冲瞬间抽干（或填满）三极管内部电荷，实现纳秒级秒开秒关！
+      </div>
+    </div>
+  </div>
+
+<script>
+  let txdHigh = true;
+  let mainTxdHigh = true;
+  let vddOn = true;      // VDD_EXT 是否正常供电 1.8V
+  let resPresent = true; // 4.7K 电阻是否正常接入（false 表示短接直连）
+  let capPresent = true; // 1nF 电容是否正常接入（false 表示拔掉电容）
+  let autoTimer = null;
+  let vipTimeout = null;
+
+  function triggerTransientVIP() {
+    if (!capPresent || !vddOn) return;
+    const vipPath = document.getElementById('flow-top-cap-vip');
+    const plate1 = document.getElementById('cap-plate-1');
+    const plate2 = document.getElementById('cap-plate-2');
+    const rcBadge = document.getElementById('rc-mode-badge');
+
+    vipPath.style.display = 'block';
+    plate1.classList.add('cap-vip-active');
+    plate2.classList.add('cap-vip-active');
+    rcBadge.className = 'badge badge-vip';
+    rcBadge.textContent = '⚡ 1nF 瞬态冲锋 (几纳秒)';
+
+    clearTimeout(vipTimeout);
+    vipTimeout = setTimeout(() => {
+      vipPath.style.display = 'none';
+      plate1.classList.remove('cap-vip-active');
+      plate2.classList.remove('cap-vip-active');
+      updateAll();
+    }, 550);
+  }
+
+  function toggleTXD() {
+    txdHigh = !txdHigh;
+    updateAll();
+    triggerTransientVIP();
+  }
+
+  function toggleMainTXD() {
+    mainTxdHigh = !mainTxdHigh;
+    updateAll();
+  }
+
+  function toggleVDD() {
+    vddOn = !vddOn;
+    const btn = document.getElementById('btn-vdd');
+    const badge = document.getElementById('badge-vdd-exp');
+    if (vddOn) {
+      btn.className = 'btn-exp-on';
+      btn.innerText = '⚡ VDD_EXT: 1.8V 正常开机';
+      badge.className = 'badge badge-on';
+      badge.innerText = '已开启';
+    } else {
+      btn.className = 'btn-exp-warn';
+      btn.innerText = '🔌 VDD_EXT: 0V (模拟模组关机)';
+      badge.className = 'badge badge-off';
+      badge.innerText = '断电保护中';
+    }
+    updateAll();
+  }
+
+  function toggleRes() {
+    resPresent = !resPresent;
+    const btn = document.getElementById('btn-res');
+    const badge = document.getElementById('badge-res-exp');
+    if (resPresent) {
+      btn.className = 'btn-exp-on';
+      btn.innerText = '🛡️ 4.7K 电阻: 正常接入';
+      badge.className = 'badge badge-on';
+      badge.innerText = '保护中';
+    } else {
+      btn.className = 'btn-exp-danger';
+      btn.innerText = '💥 4.7K 电阻: 已短接直连 (危险!)';
+      badge.className = 'badge badge-danger';
+      badge.innerText = '过流烧毁风险!';
+    }
+    updateAll();
+  }
+
+  function toggleCap() {
+    capPresent = !capPresent;
+    const btn = document.getElementById('btn-cap');
+    const badge = document.getElementById('badge-cap-exp');
+    const scopeBadge = document.getElementById('scope-badge');
+    const waveWithCap = document.getElementById('wave-withcap');
+    const scopeNote = document.getElementById('scope-note');
+
+    if (capPresent) {
+      btn.className = 'btn-exp-on';
+      btn.innerText = '🚀 1nF 电容: 正常接入';
+      badge.className = 'badge badge-vip';
+      badge.innerText = '高速加速中';
+      scopeBadge.className = 'badge badge-on';
+      scopeBadge.innerText = '高速方波正常';
+      waveWithCap.setAttribute('d', 'M 30 30 L 90 30 L 92 105 L 210 105 L 213 30 L 360 30');
+      waveWithCap.setAttribute('stroke', '#38bdf8');
+      scopeNote.textContent = '⚡ 1nF 瞬态抽空电荷，边沿极陡！';
+      scopeNote.setAttribute('fill', '#38bdf8');
+      document.getElementById('svg-cap-top-group').style.opacity = '1';
+      document.getElementById('svg-cap-bot-group').style.opacity = '1';
+    } else {
+      btn.className = 'btn-exp-warn';
+      btn.innerText = '🐢 1nF 电容: 已拔除 (观察波形失真)';
+      badge.className = 'badge badge-off';
+      badge.innerText = '已移除 (慢速)';
+      scopeBadge.className = 'badge badge-danger';
+      scopeBadge.innerText = '边沿缓慢拖尾!';
+      waveWithCap.setAttribute('d', 'M 30 30 L 90 30 L 95 105 L 210 105 Q 255 103 295 30 L 360 30');
+      waveWithCap.setAttribute('stroke', '#ef4444');
+      scopeNote.textContent = '🐢 仅靠 4.7K 排空电荷太慢，上升沿严重拖尾！';
+      scopeNote.setAttribute('fill', '#ef4444');
+      document.getElementById('svg-cap-top-group').style.opacity = '0.25';
+      document.getElementById('svg-cap-bot-group').style.opacity = '0.25';
+    }
+    updateAll();
+  }
+
+  function updateAll() {
+    // 更新按钮状态
+    const btnTxd = document.getElementById('btn-txd');
+    btnTxd.className = txdHigh ? 'btn-high' : 'btn-low';
+    btnTxd.innerText = txdHigh ? 'MCU_TXD: 3.3V (高)' : 'MCU_TXD: 0V (低)';
+
+    const btnMainTxd = document.getElementById('btn-maintxd');
+    btnMainTxd.className = mainTxdHigh ? 'btn-high' : 'btn-low';
+    btnMainTxd.innerText = mainTxdHigh ? 'MAIN_TXD: 1.8V (高)' : 'MAIN_TXD: 0V (低)';
+
+    // 更新 4.7K 电阻外观
+    const resBox = document.getElementById('svg-res-top-box');
+    const resTxt = document.getElementById('svg-res-top-txt');
+    if (resPresent) {
+      resBox.setAttribute('fill', '#1e293b');
+      resBox.setAttribute('stroke', '#cbd5e1');
+      resTxt.textContent = '4.7K (限流)';
+      resTxt.setAttribute('fill', '#cbd5e1');
+    } else {
+      resBox.setAttribute('fill', '#ef4444');
+      resBox.setAttribute('stroke', '#fde047');
+      resTxt.textContent = '0Ω 短接铜皮!';
+      resTxt.setAttribute('fill', '#fde047');
+    }
+
+    // 更新 VDD_EXT 文本
+    const vddStr = vddOn ? 'VDD_EXT (1.8V)' : 'VDD_EXT (0V 断电)';
+    document.getElementById('svg-vdd-top-txt').textContent = vddStr;
+    document.getElementById('svg-vdd-pull-txt').textContent = vddStr;
+    document.getElementById('svg-vdd-bot-txt').textContent = vddStr;
+
+    // ========== 计算上路 Q1 物理状态 ==========
+    const wireLeft = document.getElementById('wire-txd-left');
+    const wireRight = document.getElementById('wire-txd-right');
+    const voltLeft = document.getElementById('volt-txd-left');
+    const voltRight = document.getElementById('volt-txd-right');
+    const q1Bg = document.getElementById('q1-bg');
+    const q1Label = document.getElementById('q1-label');
+    const flowMain = document.getElementById('flow-top-main');
+    const flowBase = document.getElementById('flow-top-base');
+    const vbTxt = document.getElementById('q1-vb-txt');
+    const resDropTxt = document.getElementById('svg-res-drop-txt');
+
+    // 右侧显微镜数值元素
+    const valVdd = document.getElementById('val-vdd');
+    const valVb = document.getElementById('val-vb');
+    const valVr = document.getElementById('val-vr');
+    const valIb = document.getElementById('val-ib');
+    const rcMicroDesc = document.getElementById('rc-micro-desc');
+    const rcBadge = document.getElementById('rc-mode-badge');
+
+    // 左端 TXD 线显示
+    if (txdHigh) {
+      wireLeft.setAttribute('stroke', '#ef4444');
+      voltLeft.setAttribute('fill', '#ef4444');
+      voltLeft.textContent = 'VE = 3.3V (高)';
+    } else {
+      wireLeft.setAttribute('stroke', '#38bdf8');
+      voltLeft.setAttribute('fill', '#38bdf8');
+      voltLeft.textContent = 'VE = 0V (低)';
+    }
+
+    if (!vddOn) {
+      // 模组关机状态 (VDD_EXT = 0V)
+      wireRight.setAttribute('stroke', '#64748b');
+      voltRight.setAttribute('fill', '#94a3b8');
+      voltRight.textContent = '0V (模组关机)';
+      q1Bg.setAttribute('stroke', '#475569');
+      q1Bg.setAttribute('fill', '#0f172a');
+      q1Label.textContent = 'Q1: 锁死 (防倒灌保护)';
+      q1Label.setAttribute('fill', '#f59e0b');
+      flowMain.style.display = 'none';
+      flowBase.style.display = 'none';
+      vbTxt.textContent = 'VB = 0.0V';
+      resDropTxt.textContent = '压降: 0V';
+
+      valVdd.textContent = '0.00 V';
+      valVb.textContent = '0.00 V';
+      valVr.textContent = '0.00 V';
+      valIb.textContent = '0.00 mA';
+      rcBadge.className = 'badge badge-off';
+      rcBadge.textContent = '防倒灌锁死';
+      rcMicroDesc.innerHTML = `<b style="color:#f59e0b;">【模组断电防倒灌模式】</b>：因为 <code>VDD_EXT = 0V</code>，三极管基极没有 1.8V 偏置，无论左边 MCU 发 3.3V 还是 0V，三极管都<b>彻底断开</b>，完美防止 MCU 3.3V 电流倒灌损坏未开机的模组！`;
+    } else if (txdHigh) {
+      // VDD_EXT = 1.8V, MCU_TXD = 3.3V (高电平截止)
+      wireRight.setAttribute('stroke', '#facc15');
+      voltRight.setAttribute('fill', '#facc15');
+      voltRight.textContent = '1.8V (高电平)';
+      q1Bg.setAttribute('stroke', '#475569');
+      q1Bg.setAttribute('fill', '#0f172a');
+      q1Label.textContent = 'Q1: 截止 (断开)';
+      q1Label.setAttribute('fill', '#94a3b8');
+      flowMain.style.display = 'none';
+      flowBase.style.display = 'none';
+      vbTxt.textContent = 'VB = 1.8V';
+      resDropTxt.textContent = '压降: 0V (无电流)';
+      resDropTxt.setAttribute('fill', '#94a3b8');
+
+      valVdd.textContent = '1.80 V';
+      valVb.textContent = '1.80 V';
+      valVr.textContent = '0.00 V';
+      valIb.textContent = '0.00 mA';
+      rcBadge.className = 'badge badge-off';
+      rcBadge.textContent = '反偏截止';
+      rcMicroDesc.innerHTML = `<b>【高电平隔离状态】</b>：发射极 <code>VE = 3.3V</code> 高于基极 <code>VB = 1.8V</code>，三极管反偏截止。此时基极没有电流，4.7K 电阻两端无压降，<code>VB</code> 等于 1.8V。`;
+    } else {
+      // VDD_EXT = 1.8V, MCU_TXD = 0V (低电平导通)
+      wireRight.setAttribute('stroke', '#38bdf8');
+      voltRight.setAttribute('fill', '#38bdf8');
+      voltRight.textContent = '≈0.1V (低电平)';
+      flowMain.style.display = 'block';
+      flowBase.style.display = 'block';
+
+      if (resPresent) {
+        // 正常有 4.7K 电阻限流
+        q1Bg.setAttribute('stroke', '#10b981');
+        q1Bg.setAttribute('fill', 'rgba(16, 185, 129, 0.2)');
+        q1Label.textContent = 'Q1: 饱和导通 (VB=0.7V)';
+        q1Label.setAttribute('fill', '#10b981');
+        flowBase.setAttribute('stroke', '#facc15');
+        flowBase.setAttribute('class', 'current-flow-right');
+        vbTxt.textContent = 'VB ≈ 0.7V';
+        resDropTxt.textContent = '扛住压降: 1.1V';
+        resDropTxt.setAttribute('fill', '#10b981');
+
+        valVdd.textContent = '1.80 V';
+        valVb.textContent = '0.70 V (PN结钳位)';
+        valVr.textContent = '1.10 V (1.8V-0.7V)';
+        valIb.textContent = '0.23 mA (安全)';
+        valIb.style.color = '#10b981';
+        rcBadge.className = 'badge badge-on';
+        rcBadge.textContent = '正常饱和导通';
+        rcMicroDesc.innerHTML = `<b>【低电平导通状态】</b>：发射极 <code>VE = 0V</code>，三极管 B-E 结正向导通并将基极钳位在 <code>0.7V</code>！<b>4.7K 电阻</b>成功扛住了剩余的 <code>1.1V</code> 压差，把基极电流限制在安全的 <code>0.23mA</code>。`;
+      } else {
+        // 短接了 4.7K 电阻！灾难模式！
+        q1Bg.setAttribute('stroke', '#ef4444');
+        q1Bg.setAttribute('fill', 'rgba(239, 68, 68, 0.35)');
+        q1Label.textContent = '🔥 Q1 过流烧毁警告!!';
+        q1Label.setAttribute('fill', '#ef4444');
+        flowBase.setAttribute('stroke', '#ef4444');
+        flowBase.setAttribute('class', 'current-flow-danger');
+        vbTxt.textContent = '🔥 1.8V 硬怼 0.7V!';
+        resDropTxt.textContent = '⚠️ 无电阻限流 Short!';
+        resDropTxt.setAttribute('fill', '#ef4444');
+
+        valVdd.textContent = '1.80 V (被拉垮)';
+        valVb.textContent = '🔥 强行 1.8V 灌入';
+        valVr.textContent = '0.00 V (已短接)';
+        valIb.textContent = '> 50 mA (烧毁!!)';
+        valIb.style.color = '#ef4444';
+        rcBadge.className = 'badge badge-danger';
+        rcBadge.textContent = '🔥 过流烧毁!';
+        rcMicroDesc.innerHTML = `<b style="color:#ef4444;">【⚠️ 短接 4.7K 灾难现场】</b>：没有了 4.7K 电阻，1.8V 电源直接怼在 0.7V 的 B-E 二极管上（直通 0V 的 TXD），产生极大短路电流，<b>瞬间烧毁三极管或模组 VDD_EXT 引脚</b>！这就是为什么必须加 4.7K 电阻！`;
+      }
+    }
+
+    // ========== 计算下路 Q2 物理状态 ==========
+    const wireRxdLeft = document.getElementById('wire-rxd-left');
+    const wireRxdRight = document.getElementById('wire-rxd-right');
+    const voltRxdLeft = document.getElementById('volt-rxd-left');
+    const voltRxdRight = document.getElementById('volt-rxd-right');
+    const q2Bg = document.getElementById('q2-bg');
+    const q2Label = document.getElementById('q2-label');
+    const flowBot = document.getElementById('flow-bot');
+
+    if (!vddOn || mainTxdHigh) {
+      wireRxdRight.setAttribute('stroke', vddOn ? '#facc15' : '#64748b');
+      voltRxdRight.setAttribute('fill', vddOn ? '#facc15' : '#94a3b8');
+      voltRxdRight.textContent = vddOn ? 'VE = 1.8V (高)' : 'VE = 0V (关机)';
+
+      wireRxdLeft.setAttribute('stroke', '#ef4444');
+      voltRxdLeft.setAttribute('fill', '#ef4444');
+      voltRxdLeft.textContent = '3.3V (高)';
+
+      q2Bg.setAttribute('stroke', '#475569');
+      q2Bg.setAttribute('fill', '#0f172a');
+      q2Label.textContent = vddOn ? 'Q2: 截止 (断开)' : 'Q2: 锁死 (防倒灌)';
+      q2Label.setAttribute('fill', '#94a3b8');
+      flowBot.style.display = 'none';
+    } else {
+      wireRxdRight.setAttribute('stroke', '#38bdf8');
+      voltRxdRight.setAttribute('fill', '#38bdf8');
+      voltRxdRight.textContent = 'VE = 0V (低)';
+
+      wireRxdLeft.setAttribute('stroke', '#38bdf8');
+      voltRxdLeft.setAttribute('fill', '#38bdf8');
+      voltRxdLeft.textContent = '≈0.1V (低)';
+
+      q2Bg.setAttribute('stroke', '#10b981');
+      q2Bg.setAttribute('fill', 'rgba(16, 185, 129, 0.2)');
+      q2Label.textContent = 'Q2: 饱和导通!';
+      q2Label.setAttribute('fill', '#10b981');
+      flowBot.style.display = 'block';
+    }
+  }
+
+  let step = 0;
+  function toggleAuto() {
+    const btnAuto = document.getElementById('btn-auto');
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+      btnAuto.classList.remove('active');
+      btnAuto.innerText = '▶ 自动脉冲';
+    } else {
+      btnAuto.classList.add('active');
+      btnAuto.innerText = '⏸ 停止脉冲';
+      autoTimer = setInterval(() => {
+        step = (step + 1) % 2;
+        toggleTXD();
+      }, 1300);
+    }
+  }
+
+  // 初始化渲染
+  updateAll();
+</script>
+
+</body>
+</html>
